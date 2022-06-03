@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html ng-app="starter">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+	<meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+    <title></title>
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+
+    <!-- your app's js -->
+    <script src="js/app.js"></script>
+    <script src="js/control.js"></script>
+    <script src="js/service.js"></script>
+	
+    <script src="lib/ngstorage/ngStorage.min.js"></script>
+<!--
+http://ionicframework.com/tutorials/intro-tutorial/
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+-->
+<style type="text/css">	
+.grad{width:50px;height:50px;border-radius:50px;background:linear-gradient(to bottom, #ffffff, #09f);padding-top:0px;border: 5px solid #cbc9c9;padding-top:4px;padding-left:5px;float:left;margin-left:3px;margin-right:3px;}	
+</style>
+
+<!--
+<script type="text/javascript">
+    $(function(){
+        if (/iPhone|iPod|iPad/.test(navigator.userAgent))
+            $('iframe').wrap(function(){
+                var $this = $(this);
+                return $('<div />').css({
+                    width: $this.attr('width'),
+                    height: $this.attr('height'),
+                    overflow: 'auto',
+                    '-webkit-overflow-scrolling': 'touch'
+                });
+            });
+    })
+</script>
+-->
+
+<script type="text/javascript">
+
+
+
+
+function scrollToTop()
+{
+	var elem = angular.element(document.querySelector('[ng-app]'));
+	var injector = elem.injector();
+	var scrollService = injector.get('ScrollService');
+	scrollService.scrollTop();
+}
+
+function hideloading()
+{
+	var elem = angular.element(document.querySelector('[ng-app]'));
+	var injector = elem.injector();
+	var pushService = injector.get('LoadingService');
+	pushService.hide();
+}
+
+function resizeCrossDomainIframe(id, other_domain) 
+{
+    iframe = document.getElementById(id);
+	
+//    iframe.height = '0px'; //clean the scroll
+	
+    
+	/*
+	iframe.addEventListener('mouseover',function(){
+		myConfObj.iframeMouseOver = true;
+	});
+	
+	iframe.addEventListener('mouseout',function(){
+		myConfObj.iframeMouseOver = false;
+	});	
+*/
+	/* 
+	var timerId = setInterval(function(){
+		//alert(iframe.height);
+		if (iframe.height!= '0px' ) { 
+			// adjust the iframe's size
+			iframe.style.height = iframe.contentWindow.document.body.scrollHeight + 'px';
+			alert(iframe.style.height);
+			clearInterval(timerId);
+		}
+	}, 200);
+	*/
+	
+
+      
+	  
+
+	  //iframe.scrollTo(0,0);
+	  //
+	  //iframe.parent.scrollTo(0,0);
+	//	alert(iframe.height);
+//$scope.$broadcast('scroll.scrollTop');
+	//      window.parent.scrollTo(0,0);
+//	  window.parent.scrollTo(0,0);
+//	  var iFrameID = document.getElementById('scrollingiframe');
+//	  $scope.$broadcast('scroll.scrollTop');
+		
+    
+
+ //!important
+	//iframe.parentElement.scrollTo(0,0);
+	//iframe.parent.parent.scrollTo(0,0);
+	//scrollToTop();
+}
+
+
+var iframe = "";
+	window.addEventListener('message', function(event) 
+	{
+	  //if (event.origin !== other_domain) return; // only accept messages from the specified domain
+    //  if (event.origin.indexOf(other_domain)==-1) return; // only accept messages from the specified domain
+      if (isNaN(event.data)) return; // only accept something which can be parsed as a number
+      
+	  iframe.height = (window.innerHeight-50)+'px';
+	
+	  var height = parseInt(event.data) + 50; // add some extra height to avoid scrollbar
+	  
+	  setTimeout(function () {
+		 iframe.height = height + "px";
+		 hideloading(); 
+		 iframe.scrollTop = -30;
+	  }, 50);
+	}, false);
+		  
+	/*	  
+var myConfObj = {
+  iframeMouseOver : false
+}
+window.addEventListener('blur',function(){
+  if(myConfObj.iframeMouseOver){
+    alert('Wow! Iframe Click!');
+  }
+});
+*/
+	  
+		  
+/*
+function change() {
+    alert("a");
+    var scope = angular.element($("#outer")).scope();
+    scope.$broadcast('scroll.scrollTop');
+	//scope.$apply(function(){
+    //   scope.msg = 'Superhero';
+    //})
+}
+*/
+</script>
+
+<script type="text/javascript">
+ //$(document).ready(function() {
+ //   $("html").niceScroll("#needscroll"); 
+ // });
+ 
+   function resizeIframe(obj) {
+    obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+	alert(obj.style.height);
+  }
+ 
+ 
+ 
+ 
+function iframeloadinit()
+{
+      var iFrameID = document.getElementById('scrollingiframe');
+   // alert("hihi");
+	  if(iFrameID) {
+            // here you can make the height, I delete it first, then I make it again
+            iFrameID.height = "";
+            iFrameID.height = iFrameID.contentWindow.document.body.scrollHeight*20 + "px";
+			alert(iFrameID.height);
+			window.scrollTo(0,0);
+      }
+
+
+//		alert(this.contentWindow.document.body.offsetHeight);
+// 		this.style.height =	this.contentWindow.document.body.offsetHeight + 'px';
+}
+ 
+ window.onload = function(e){ 
+	//iframeloadinit();
+	//$('iframe').load(function() {
+	//	this.style.height =
+	//	this.contentWindow.document.body.offsetHeight + 'px';
+	//	window.scrollTo(0,0);
+	//});
+};
+
+//	var a = document.getElementById('needscroll');
+//	a && a.contentWindow && a.contentWindow.focus();
+
+</script>
+
+<style type="text/css">
+.profile-iframe-wrapper iframe {
+   width: 100%;
+   height: 1800px;
+ }
+</style>
+
+	
+<style type="text/css">
+
+
+.scroll {
+  min-height: 100%;
+}
+.main-content {
+	background: url('../img/main-bg.png');
+	background-size: 100% 100%;
+}
+
+.main-top-wrapper {
+	/*background-color: #F7F7F7;*/
+	background-color: #777070;
+	position: relative;
+}
+
+.main-top-frame {
+	height: 180px;
+	width: 100%;
+	background-image: url('img/home-bg.jpg');
+	background-size: cover;
+	-webkit-filter:blur(2px);
+	opacity:.9;
+	position: relative;
+}
+
+.main-top-title {
+	font-size: 22px;
+	color: #FFFFFF;
+	position: absolute;
+	width: 100%;
+	top: 10px;
+	left: 105px;
+	text-align: center;
+}
+
+
+.main-bottom-frame {
+	height: 60px;
+	position: absolute;
+	width: 100%;
+	bottom: -1px;
+}
+
+.main-bottom-frame:before {
+	opacity:.5;
+	content: "";
+    background: #000;
+    background-size: cover;
+    width: 100%;
+    height: 60px;
+    position: absolute;
+    z-index: 2;
+    opacity: 0.7;
+}
+
+.main-user-avatar {
+	position: absolute;
+	top: 70px;
+	width: 80px;
+	height: 80px;
+ 	-webkit-border-radius: 40px;
+    -moz-border-radius: 40px;
+    -ms-border-radius: 40px;
+    -o-border-radius: 40px;
+    border-radius: 40px;
+    border: 2px solid #FFF;
+    left: 50%;
+    margin-left: -40px;
+    z-index: 2;
+    background-size: cover;
+}
+
+
+.main-profile {
+	position: absolute;
+	top: 120px;
+	left: 15px;
+	z-index: 2;
+	font-size: 28px;
+	color: #FFF;
+	font-weight: bold;
+	text-align: center;
+}
+.main-profile-title {
+	font-size: 14px;
+}
+
+.main-cart {
+	position: absolute;
+	top: 120px;
+	right: 15px;
+	z-index: 2;
+	font-size: 28px;
+	color: #FFF;
+	font-weight: bold;
+	text-align: center;
+}
+.main-cart-title {
+	font-size: 14px;
+}
+
+.main-cart-count {
+	position: absolute;
+	top: 129px;
+	right: 50px;
+	z-index: 2;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.main-neighbor-block {
+	position: absolute;
+	top: 154px;
+	left: 50%;
+	margin-left: -50px;
+	z-index: 2;
+	font-size: 16px;
+	color: #FFF;
+	font-weight: bold;
+	text-align: center;
+	width: 100px;
+}
+
+.menu-item-wrapper {
+	color: #444;
+	text-align: center;
+	height: 88px;
+	width: 88px;
+	margin: 0 auto;
+}
+
+.menu-item-wrapper.pink {
+	background: url("img/menu-button-pink.png");
+	background-size: 100% 100%;
+}
+
+.menu-item-wrapper.navy {
+	background: url("img/menu-button-navy.png");
+	background-size: 100% 100%;
+}
+
+.menu-item-wrapper.curry {
+	background: url("img/menu-button-curry.png");
+	background-size: 100% 100%;
+}
+
+.menu-item-wrapper.green {
+	background: url("img/menu-button-green.png");
+	background-size: 100% 100%;
+}
+
+.menu-item-wrapper.apple {
+	background: url("img/menu-button-apple.png");
+	background-size: 100% 100%;
+}
+
+.menu-item-wrapper.blue {
+	background: url("img/menu-button-blue.png");
+	background-size: 100% 100%;
+}
+
+.menu-item-wrapper.red {
+	background: url("img/menu-button-red.png");
+	background-size: 100% 100%;
+}
+
+.menu-item-icon-wrap {
+	font-weight: bold;
+	white-space: nowrap;
+	color: #ffffff;
+	line-height: 30px;
+  	font-size: 36px;
+  	margin: 0px auto;
+  	height: 40px;
+  	width: 40px;
+  	background-repeat:no-repeat;
+}
+
+.menu-item-text {
+	padding-top: 5px;
+}
+
+.menu-item-icon-wrap-before {
+	padding-top: 10px;
+	content: ' ';
+}
+
+.menu-item-icon-wrap:after {
+	content: ' ';
+}
+
+
+.menu-item-icon-wrap.announcement {
+	background: url("img/icon_08.png");
+	background-position: 0px 0px;
+	background-size: 100% 100%;
+	background-repeat:no-repeat;
+}
+
+.menu-item-icon-wrap.home {
+	background: url("img/icon_03.png");
+	background-position: 0px 0px;
+	background-size: 100% 100%;
+	background-repeat:no-repeat;
+}
+
+.menu-item-icon-wrap.forum {
+	background: url("img/icon_05.png");
+	background-position: 0px 0px;
+	background-size: 100% 100%;
+	background-repeat:no-repeat;
+}
+
+.menu-item-icon-wrap.coupon {
+	background: url("img/icon_15.png");
+	background-position: 0px 0px;
+	background-size: 100% 100%;
+	background-repeat:no-repeat;
+}
+
+.menu-item-icon-wrap.food {
+	background: url("img/icon_14.png");
+	background-position: 0px 0px;
+	background-size: 100% 100%;
+	background-repeat:no-repeat;
+}
+
+.menu-item-icon-wrap.market {
+	background: url("img/icon_17.png");
+	background-position: 0px 0px;
+	background-size: 100% 100%;
+	background-repeat:no-repeat;
+}
+
+.menu-item-icon-wrap.ldds {
+	background: url("img/icon_28.png");
+	background-position: 0px 0px;
+	background-size: 100% 100%;
+	width:60px !important;
+	background-repeat:no-repeat;
+}
+
+.menu-item-icon-wrap.ldds2 {
+	background: url("img/icon_01.png");
+	background-position: 0px 0px;
+	background-size: 100% 100%;
+	width:40px !important;
+	background-repeat:no-repeat;
+}
+
+.menu-item-icon-wrap.tel {
+	background: url("img/icon_23.png");
+	background-position: 0px 0px;
+	background-size: 100% 100%;
+	background-repeat:no-repeat;
+}
+
+.menu-item-icon-wrap.about {
+	background: url("img/icon_25.png");
+	background-position: 0px 0px;
+	background-size: 100% 100%;
+	width:50px !important;
+	background-repeat:no-repeat;
+}
+
+.menu-item-icon-wrap.house {
+	background: url("img/icon2_06.png");
+	background-position: 0px 0px;
+	background-size: 100% 100%;
+	width:50px !important;
+	background-repeat:no-repeat;
+}
+
+.menu-item-icon-wrap.medic {
+	background: url("img/icon_11.png");
+	background-position: 0px 0px;
+	background-size: 100% 100%;
+	width:50px !important;
+	background-repeat:no-repeat;
+}
+
+.menu-item-icon-wrap.edu {
+	background: url("img/icon_07.png");
+	background-position: 0px 0px;
+	background-size: 100% 100%;
+	background-repeat:no-repeat;
+}
+
+</style>
+	
+	
+  </head>
+  <body class="platform-android platform-cordova platform-webview">
+<!--  
+      <ion-nav-bar class="bar-baoku">
+        <ion-nav-back-button class="button-icon icon ion-chevron-left">
+        </ion-nav-back-button>
+      </ion-nav-bar>
+
+      <ion-nav-view animation="slide-left-right"></ion-nav-view>
+
+
+<ion-side-menus>
+  <ion-side-menu-content ng-controller="ContentController">
+  </ion-side-menu-content>
+
+  <ion-side-menu side="left">
+  </ion-side-menu>
+
+  <ion-side-menu side="right">
+  </ion-side-menu>
+</ion-side-menus>
+  
+	
+    <ion-nav-bar class="nav-title-slide-ios7 bar-positive">
+      <ion-nav-back-button class="button-icon ion-arrow-left-c">
+      </ion-nav-back-button>
+    </ion-nav-bar>
+	-->              
+	
+	  
+    <ion-nav-view ></ion-nav-view>
+	
+	
+
+
+<!--
+    <ion-pane>
+      <ion-header-bar class="bar-stable">
+        <h1 class="title">Ionic Blank Starter</h1>
+      </ion-header-bar>
+      <ion-content>
+-->	  
+	  <!--
+		    <script id="tabs.html" type="text/ng-template">
+      <ion-tabs class="tabs-icon-top tabs-positive">
+
+        <ion-tab title="Home" icon="ion-home" href="#/demo">
+          <ion-nav-view name="home-tab"></ion-nav-view>
+        </ion-tab>
+
+        <ion-tab title="About" icon="ion-ios7-information" href="#/tab/about">
+          <ion-nav-view name="about-tab"></ion-nav-view>
+        </ion-tab>
+
+        <ion-tab title="Contact" icon="ion-ios7-world" ui-sref="tabs.contact">
+          <ion-nav-view name="contact-tab"></ion-nav-view>
+        </ion-tab>
+
+      </ion-tabs>
+    </script> 
+	 --> 
+
+	  
+<!--	  
+      </ion-content>
+    </ion-pane>
+-->	
+	
+  </body>
+</html>

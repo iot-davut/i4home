@@ -1,0 +1,45 @@
+
+
+
+
+	<ion-view view-title="{{$root.counterValue}}"  hide-back-button="true">
+		<ion-content class="has-header"  scroll="true" overflow-scroll="true" ng-controller="ContentCtrl">
+<!--
+	<div style="height:55px;padding-top:2px;background-color:rgba(89,204,253,1);border-bottom:5px solid #cbc9c9;">
+		<div ng-if="statusmode == 0" class="grad" style="background:linear-gradient(to bottom, #ffffff, #009f2d);margin-left:50px;border: 5px solid #fee120;" ng-click="updatestatus(0)"><img width="30px;" src="image/disarm.png"/></div>
+        <div ng-if="statusmode != 0" class="grad" style="background:linear-gradient(to bottom, #ffffff, #009f2d);margin-left:50px;" ng-click="updatestatus(0)"><img width="30px;" src="image/disarm.png"/></div>
+		<div ng-if="statusmode == 1" class="grad" style="background:linear-gradient(to bottom, #ffffff, #fed701);border: 5px solid #fee120;" ng-click="updatestatus(1)"><img width="30px;" src="image/home.png"/></div>
+		<div ng-if="statusmode != 1" class="grad" style="background:linear-gradient(to bottom, #ffffff, #fed701);" ng-click="updatestatus(1)"><img width="30px;" src="image/home.png"/></div>
+		<div ng-if="statusmode == 2" class="grad" style="background:linear-gradient(to bottom, #ffffff, #fe011f);border: 5px solid #fee120;" ng-click="updatestatus(2)"><img width="30px;" src="image/away.png"/></div>
+		<div ng-if="statusmode != 2" class="grad" style="background:linear-gradient(to bottom, #ffffff, #fe011f);" ng-click="updatestatus(2)"><img width="30px;" src="image/away.png"/></div>
+		<div ng-if="statusmode == 3" class="grad" style="background:linear-gradient(to bottom, #ffffff, #09f);border: 5px solid #fee120;" ng-click="updatestatus(3)"><img width="30px;" src="image/clear.png"/></div>
+		<div ng-if="statusmode != 3" class="grad" style="background:linear-gradient(to bottom, #ffffff, #09f);" ng-click="updatestatus(3)"><img width="30px;" src="image/clear.png"/></div>		
+	</div>
+-->
+			<iframe id="scrollingiframe" width="100%" frameborder="0" border="0" scrolling="no" onload="resizeCrossDomainIframe('scrollingiframe', 'livingpattern.co');" ng-src="{{alarmurl}}"></iframe>
+		
+		</ion-content>
+	</ion-view>
+  
+
+
+
+<div id="tabCtrl"  class="tabs tabs-icon-top"  style="border-top:3px solid #cbc9c9;" ng-controller="TabCtrl">
+  <div class="tab-item" ng-click="gotostatus()">
+	<img width="30px;" src="image/status.png"/><br>
+    Status
+  </div>
+  <div class="tab-item" ng-click="gotocontrol()">
+	<img width="30px;" src="image/control.png"/><br>
+    Control
+  </div>
+  <div class="tab-item" ng-click="locationrefresh()">
+	<img width="31px;" src="image/event_select.png"/><br>	
+    <span style="background-color:#dddddd;color:#000000;padding:1px;-moz-border-radius: 5px;border-radius: 5px;">Alarm</span>
+  </div>
+  <div class="tab-item" ng-click="gotodevice()">
+	<img width="30px;" src="image/device.png"/><br>	
+    Device
+  </div>
+</div>
+

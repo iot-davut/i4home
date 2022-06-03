@@ -1,0 +1,64 @@
+
+
+
+  <!--
+  
+
+    <ion-nav-bar class="nav-title-slide-ios7 bar-positive">
+      <ion-nav-back-button class="button-icon ion-arrow-left-c">
+      </ion-nav-back-button>
+    </ion-nav-bar>
+
+<ion-nav-view class="slide-left-right"></ion-nav-view>  
+  
+  <div class="bar bar-header" style="height:100px;">
+  <h2>LivingPattern</h2>
+
+<img width="100px;" src="http://beta.livingpattern.co/beta/iklomp_hover.png"/>
+
+
+</div>
+-->
+
+
+<ion-view hide-nav-bar="true">
+    <ion-content style="background-image: url('image/bg.jpg')">
+        <div class="row">
+          <div class="col text-center">
+            <img src="image/loginlogo.png" />
+          </div>
+        </div>
+        <div class="list">
+            <label class="item item-input">
+              <span class="input-label">Username</span>
+              <input type="text" ng-model="user.username" placeholder="username">
+            </label>
+            <label class="item item-input">
+              <span class="input-label">Password</span>
+              <input type="password" ng-model="user.password" placeholder="password">
+            </label>
+          </div>
+          <div class="padding">
+            <button class="button button-block button-positive" ng-click="tryLogin(user)">
+              Login
+            </button>
+            <div class="row">
+            
+            <div class="col">
+			
+            <button class="button button-block button-clear button-stable" ui-sref="register">
+              Register
+            </button>
+			</div>
+			<div class="col">
+            <button class="button button-block button-clear button-stable" ui-sref="forgetpwd">
+              Forget Password
+            </button>
+            </div>
+            </div>
+          </div>
+    </ion-content>
+    <img id="elephant" crossorigin="anonymous" style="opacity: 0"/>
+</ion-view>
+
+
